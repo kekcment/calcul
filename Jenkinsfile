@@ -3,6 +3,7 @@ pipeline {
   agent {
     docker {
         image 'kekcment/tom:0.1.1'
+        args '--privileged -v /var/run/docker.sock:/var/rundocker.sock'
     }
   }      
 
@@ -23,7 +24,11 @@ pipeline {
     }
         stage('Run docker)') {
       steps {
-        sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker'
+        sh 'docker build - t hw -f Dockerfile .' 
+        sh 'docker tag'
+        with DockerRegistry([]){
+            bat "docker push"
+        }
       }
     }
     
