@@ -21,6 +21,11 @@ pipeline {
         sh 'mvn package'
       }
     }
+        stage('Run docker)') {
+      steps {
+        sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker'
+      }
+    }
     
     stage('Run docker on Slave1 (158.160.27.233)') {
       steps {
