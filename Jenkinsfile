@@ -23,12 +23,12 @@ pipeline {
       }
     }
 
-    stage('Copy War') {
-      steps {
-        echo 'Build War'
-        sh 'cp target/mycalcwebapp.war /var/webapp'
-      }
-    }
+    // stage('Copy War') {
+    //   steps {
+    //     echo 'Build War'
+    //     sh 'cp target/mycalcwebapp.war /var/webapp'
+    //   }
+    // }
     
     stage('Make docker image') {
       steps {
