@@ -28,7 +28,7 @@ pipeline {
       steps {
         echo 'Copy War'
         sh 'mkdir /var/webapp'
-        sh 'cp /tmp/calculator-servlet-example/target/mycalcwebapp.war /var/webapp'
+        sh 'cp /tmp/calcul/target/mycalcwebapp.war /var/webapp'
       }
     }
     
