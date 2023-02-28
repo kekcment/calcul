@@ -43,7 +43,8 @@ pipeline {
     stage('Make docker image') {
       steps {
         echo 'Build image'
-        sh 'docker build -t hw -f Dockerfile .'        
+        // sh 'docker build -t hw -f Dockerfile .'
+        sh 'docker build -t hw .'          
         }
       }
     
