@@ -61,10 +61,10 @@ pipeline {
       steps {
         echo 'Tag and push image'
         sh 'docker tag hw kekcment/hw:latest'
-        sh 'docker docker push kekcment/hw:latest'
-      }
+        sh 'docker push kekcment/hw:latest'
     }
     }
 
     
+}
 }
