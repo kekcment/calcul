@@ -22,12 +22,13 @@ pipeline {
         sh 'mvn package'
       }
     }
-        stage('Run docker)') {
+    
+    stage('Make docker image') {
       steps {
         sh 'docker build - t hw -f Dockerfile .' 
-        sh 'docker tag'
-        with DockerRegistry([]){
-            bat "docker push"
+        sh 'docker tag hw kekcment/hw:latest'
+        withDockerRegistry([ credentialsId: "docker-hub-credentials", url: ""]) {
+            bat "docker push kekcment/hw:latest"
         }
       }
     }
