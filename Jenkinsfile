@@ -23,19 +23,19 @@ pipeline {
       }
     }
 
-    stage('Create Foulder') {
-      steps {
-        echo 'Create Foulder'
-        // sh 'mkdir /var/webapp'
-        sh 'mkdir /web/'
-      }
-    }
+    // stage('Create Foulder') {
+    //   steps {
+    //     echo 'Create Foulder'
+    //     // sh 'mkdir /var/webapp'
+    //     sh 'mkdir /web/'
+    //   }
+    // }
 
     stage('Copy War') {
       steps {
         echo 'Copy War'
         // sh 'mkdir /var/webapp'
-        sh 'cp ./target/mycalcwebapp.war /web/'
+        sh 'cp ./target/mycalcwebapp.war /tmp/'
       }
     }
     
