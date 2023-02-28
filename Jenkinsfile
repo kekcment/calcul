@@ -61,8 +61,7 @@ pipeline {
       steps {
         echo 'Tag and push image'
         sh 'docker tag hw kekcment/hw:latest'
-        withDockerRegistry([ '94260cf1-1b92-48e2-9388-b3ddb971f3fe', 'https://registry.hub.docker.com']) {
-            bat "docker push kekcment/hw:latest"
+        sh 'docker docker push kekcment/hw:latest'
       }
     }
     }
