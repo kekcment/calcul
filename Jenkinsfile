@@ -3,7 +3,7 @@ pipeline {
   agent {
     docker {
         image 'kekcment/tom:0.1.1'
-        args '--privileged -v /var/run/docker.sock:/var/rundocker.sock'
+        args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }      
 
@@ -22,22 +22,32 @@ pipeline {
         sh 'mvn package'
       }
     }
+
+    stage('Copy War') {
+      steps {
+        echo 'Build War'
+        sh 'cp target/mycalcwebapp.war /var/webapp'
+      }
+    }
     
     stage('Make docker image') {
       steps {
-        sh 'docker build - t hw -f Dockerfile .' 
-        sh 'docker tag hw kekcment/hw:latest'
-        withDockerRegistry([ credentialsId: "docker-hub-credentials", url: ""]) {
-            bat "docker push kekcment/hw:latest"
+        echo 'Build image'
+        sh 'docker build -t hw -f Dockerfile .'        
         }
       }
-    }
     
-    stage('Run docker on Slave1 (158.160.27.233)') {
+
+    stage('Tag and push image') {
       steps {
-        echo 'Run docker on Slave1'
+        echo 'Tag and push image'
+        sh 'docker tag hw kekcment/hw:latest'
+        withDockerRegistry([ 'https://registry.hub.docker.com', 'Dockerhub']) {
+            bat "docker push kekcment/hw:latest"
       }
     }
+    }
+
     
 }
 }
