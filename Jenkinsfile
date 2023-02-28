@@ -49,12 +49,17 @@ pipeline {
         }
       }
     
+    stage('Login to Docker Hub') {      	
+        steps{                       	
+	    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+	    echo 'Login Completed'      
+        }           
+    } 
 
     stage('Tag and push image') {
       steps {
         echo 'Tag and push image'
         sh 'docker tag hw kekcment/hw:latest'
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         sh 'docker push kekcment/hw:latest'
     }
     }
