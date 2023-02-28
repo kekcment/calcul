@@ -5,7 +5,11 @@ pipeline {
         image 'kekcment/tom:0.1.1'
         args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
     }
-  }      
+  }   
+
+  	environment {
+		DOCKERHUB_CREDENTIALS=credentials('fd092a3d-6b54-4fdb-bfcf-7e8c2e818872')
+	}   
 
   stages {
       
@@ -23,19 +27,9 @@ pipeline {
       }
     }
 
-    // stage('Create Foulder') {
-    //   steps {
-    //     echo 'Create Foulder'
-    //     // sh 'mkdir /var/webapp'
-    //     sh 'mkdir /tmp/web'
-    //   }
-    // }
-
     stage('Copy War') {
       steps {
         echo 'Copy War'
-        // sh 'mkdir /var/webapp'
-        // sh 'cp ./target/mycalcwebapp.war /tmp/'
         sh 'mkdir /tmp/calc && cp ./target/mycalcwebapp.war /tmp/calc'
       }
     }
@@ -51,7 +45,6 @@ pipeline {
     stage('Make docker image') {
       steps {
         echo 'Build image'
-        // sh 'docker build -t hw -f Dockerfile .'
         sh 'docker build -t hw .'          
         }
       }
@@ -61,10 +54,16 @@ pipeline {
       steps {
         echo 'Tag and push image'
         sh 'docker tag hw kekcment/hw:latest'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         sh 'docker push kekcment/hw:latest'
     }
     }
-
-    
 }
+	
+    post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
