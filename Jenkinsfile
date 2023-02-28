@@ -35,8 +35,16 @@ pipeline {
       steps {
         echo 'Copy War'
         // sh 'mkdir /var/webapp'
-        sh 'cp ./target/mycalcwebapp.war /tmp/'
+        // sh 'cp ./target/mycalcwebapp.war /tmp/'
         sh 'mkdir /tmp/calc && cp ./target/mycalcwebapp.war /tmp/calc'
+      }
+    }
+
+    stage('ShoW file War') {
+      steps {
+        echo 'ShoW file War'
+        sh 'cd /tmp/calc'
+        sh 'ls /tmp/calc'
       }
     }
     
