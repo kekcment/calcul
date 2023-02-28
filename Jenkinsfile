@@ -11,6 +11,7 @@ pipeline {
       
     stage('Copy source from git') {
       steps {
+        sh 'cd /tmp/'
         echo 'git clone'
         git 'https://github.com/kekcment/calcul.git'
       }
@@ -25,7 +26,8 @@ pipeline {
 
     // stage('Copy War') {
     //   steps {
-    //     echo 'Build War'
+    //     echo 'Copy War'
+    //     sh 'mkdir /var'
     //     sh 'cp target/mycalcwebapp.war /var/webapp'
     //   }
     // }
