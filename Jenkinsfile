@@ -27,7 +27,7 @@ pipeline {
     //   steps {
     //     echo 'Create Foulder'
     //     // sh 'mkdir /var/webapp'
-    //     sh 'mkdir /web/'
+    //     sh 'mkdir /tmp/web'
     //   }
     // }
 
@@ -36,6 +36,7 @@ pipeline {
         echo 'Copy War'
         // sh 'mkdir /var/webapp'
         sh 'cp ./target/mycalcwebapp.war /tmp/'
+        mkdir '/tmp/calc && cp ./target/mycalcwebapp.war tmp/calc'
       }
     }
     
