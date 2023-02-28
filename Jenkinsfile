@@ -24,13 +24,13 @@ pipeline {
       }
     }
 
-    // stage('Copy War') {
-    //   steps {
-    //     echo 'Copy War'
-    //     sh 'mkdir /var/webapp'
-    //     sh 'cp /tmp/calcul/target/mycalcwebapp.war /var/webapp'
-    //   }
-    // }
+    stage('Copy War') {
+      steps {
+        echo 'Copy War'
+        // sh 'mkdir /var/webapp'
+        sh 'cp /tmp/calcul/target/mycalcwebapp.war /tmp/calcul'
+      }
+    }
     
     stage('Make docker image') {
       steps {
