@@ -36,7 +36,7 @@ pipeline {
         echo 'Copy War'
         // sh 'mkdir /var/webapp'
         sh 'cp ./target/mycalcwebapp.war /tmp/'
-        mkdir '/tmp/calc && cp ./target/mycalcwebapp.war tmp/calc'
+        sh 'mkdir /tmp/calc && cp ./target/mycalcwebapp.war tmp/calc'
       }
     }
     
