@@ -52,15 +52,15 @@ pipeline {
     stage('Tag image') {
       steps {
         echo 'Tag image'
-        sh 'docker tag hw kekcment/hw'
+        sh 'docker tag hw kekcment/hwp'
 
         }
     }
 
         stage('Push image') {
       steps {
-        echo 'Tag and push image'
-        sh 'docker push kekcment/hw'
+        echo 'Push image'
+        sh 'docker push kekcment/hwp'
         }
     }
 
