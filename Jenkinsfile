@@ -7,10 +7,6 @@ pipeline {
     }
   }   
 
-  	// environment {
-	// 	DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	// }   
-
   stages {
       
     stage('Copy source from git') {
@@ -42,13 +38,6 @@ pipeline {
         }
       }
     
-    // stage('Login to Docker Hub') {      	
-    //     steps{                       	
-	//     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 		
-	//     echo 'Login Completed'      
-    //     }           
-    // } 
-
     stage('Tag image') {
       steps {
         echo 'Tag image'
@@ -57,19 +46,21 @@ pipeline {
         }
     }
 
-        stage('Push image') {
+    stage('Push image') {
       steps {
         echo 'Push image'
         sh 'docker push kekcment/hw'
         }
     }
 
+    stage ('Deploy') {
+    steps{
+        sshagent(credentials : ['22c3000e-397e-46e4-8452-ca14cbc819e1']) {
+            sh 'docker pull kekcment/hw'
+            sh 'docker run kekcment/hw'
+        }
+    }
 }
-	
-    // post {
-	// 	always {
-	// 		sh 'docker logout'
-	// 	}
-	// }
 
+}
 }
