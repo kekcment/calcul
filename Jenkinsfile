@@ -38,7 +38,7 @@ pipeline {
     stage('Make docker image') {
       steps {
         echo 'Build image'
-        sh 'docker build -t kekcment/hw .'          
+        sh 'docker build -t hw .'          
         }
       }
     
@@ -52,8 +52,8 @@ pipeline {
     stage('Tag and push image') {
       steps {
         echo 'Tag and push image'
-        sh 'docker tag kekcment/hw:latest'
-        sh 'docker push kekcment/hw:latest'
+        sh 'docker tag hw kekcment/hw'
+        sh 'docker push kekcment/hw'
     }
     }
 }
