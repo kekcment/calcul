@@ -57,7 +57,7 @@ pipeline {
     steps{
         sshagent(credentials : ['22c3000e-397e-46e4-8452-ca14cbc819e1']) {
             sh 'docker pull kekcment/hw'
-            sh 'docker run -d kekcment/hw -p 8080:8080'
+            sh 'docker run -d -p 8080:8080 kekcment/hw'
         }
     }
 }
