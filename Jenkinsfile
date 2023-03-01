@@ -7,9 +7,9 @@ pipeline {
     }
   }   
 
-  	environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}   
+  	// environment {
+	// 	DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	// }   
 
   stages {
       
@@ -52,7 +52,7 @@ pipeline {
     stage('Tag image') {
       steps {
         echo 'Tag image'
-        sh 'docker tag hw kekcment/hwp'
+        sh 'docker tag hw kekcment/hw'
 
         }
     }
@@ -60,7 +60,7 @@ pipeline {
         stage('Push image') {
       steps {
         echo 'Push image'
-        sh 'docker push kekcment/hwp'
+        sh 'docker push kekcment/hw'
         }
     }
 
