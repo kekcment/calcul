@@ -42,12 +42,12 @@ pipeline {
         }
       }
     
-    stage('Login to Docker Hub') {      	
-        steps{                       	
-	    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 		
-	    echo 'Login Completed'      
-        }           
-    } 
+    // stage('Login to Docker Hub') {      	
+    //     steps{                       	
+	//     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 		
+	//     echo 'Login Completed'      
+    //     }           
+    // } 
 
     stage('Tag and push image') {
       steps {
@@ -58,10 +58,10 @@ pipeline {
     }
 }
 	
-    post {
-		always {
-			sh 'docker logout'
-		}
-	}
+    // post {
+	// 	always {
+	// 		sh 'docker logout'
+	// 	}
+	// }
 
 }
