@@ -56,8 +56,8 @@ pipeline {
     stage ('Deploy on slave1') {
     steps{
         sshagent(credentials : ['22c3000e-397e-46e4-8452-ca14cbc819e1']) {
-            sh 'docker pull kekcment/hw'
-            sh 'docker run -d -p 8088:8080 kekcment/hw'
+            sshScript 'docker pull kekcment/hw'
+            sshScript 'docker run -d -p 8088:8080 kekcment/hw'
         }
     }
 }
