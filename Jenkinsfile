@@ -27,20 +27,13 @@ pipeline {
       }
     }
 
-    stage('Copy War') {
-      steps {
-        echo 'Copy War'
-        sh 'mkdir /tmp/calc && cp ./target/mycalcwebapp.war /tmp/calc'
-      }
-    }
-
-    stage('ShoW file War') {
-      steps {
-        echo 'ShoW file War'
-        sh 'cd /tmp/calc'
-        sh 'ls /tmp/calc'
-      }
-    }
+    // stage('Show file War') {
+    //   steps {
+    //     echo 'ShoW file War'
+    //     sh 'cd /tmp/calc'
+    //     sh 'ls /tmp/calc'
+    //   }
+    // }
     
     stage('Make docker image') {
       steps {
@@ -51,7 +44,11 @@ pipeline {
     
     stage('Login to Docker Hub') {      	
         steps{                       	
-	    sh 'docker login -u kekcment -p Ohjah8ku1'                		
+	    // sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        docker.withRegistry('https://hub.docker.com', 'dockerhub') {
+            sh 'docker tag hw kekcment/hw:latest'
+            sh 'docker push kekcment/hw:latest'
+            }                		
 	    echo 'Login Completed'      
         }           
     } 
