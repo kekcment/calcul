@@ -60,7 +60,7 @@ pipeline {
         stage('Push image') {
       steps {
         echo 'Push image'
-        sh 'docker push docker.io/kekcment/hwp'
+        sh 'docker push kekcment/hwp'
         }
     }
 
