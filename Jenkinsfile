@@ -49,13 +49,21 @@ pipeline {
     //     }           
     // } 
 
-    stage('Tag and push image') {
+    stage('Tag image') {
+      steps {
+        echo 'Tag image'
+        sh 'docker tag hw kekcment/hw'
+
+        }
+    }
+
+        stage('Push image') {
       steps {
         echo 'Tag and push image'
-        sh 'docker tag hw kekcment/hw'
         sh 'docker push kekcment/hw'
+        }
     }
-    }
+
 }
 	
     // post {
