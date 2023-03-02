@@ -53,17 +53,27 @@ pipeline {
         }
     }
 
-    stage ('Deploy on slave1') {
-    steps{
-         sshagent(credentials : ['22c3000e-397e-46e4-8452-ca14cbc819e1']) {
-            // docker pull kekcment/hw 
-            // docker run -d -p 8088:8080 kekcment/hw
-           // sh 'ssh -o StrictHostKeyChecking=no root@51.250.24.252 uname -n'
-            sh 'ssh -v root@51.250.24.252 docker pull kekcment/hw && docker run -d -p 8088:8080 kekcment/hw'
-            // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
-         }
+    // stage ('Deploy on slave1') {
+    // steps{
+    //      sshagent(credentials : ['22c3000e-397e-46e4-8452-ca14cbc819e1']) {
+    //         // docker pull kekcment/hw 
+    //         // docker run -d -p 8088:8080 kekcment/hw
+    //        // sh 'ssh -o StrictHostKeyChecking=no root@51.250.24.252 uname -n'
+    //         sh 'ssh -v root@51.250.24.252 docker pull kekcment/hw && docker run -d -p 8088:8080 kekcment/hw'
+    //         // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+    //      }
+    //     }
+    // }
+
+    stage('Deploy on slave1') {
+      steps {
+        sh 'ssh-keyscan -H root@jenkins >> ~/.ssh/known_hosts'
+        sh '''ssh root@slave1 << EOF
+	    sudo docker pull kekcment/hw
+	    docker run -d -p 8088:8080 kekcment/hw
+        EOF'''
+      }
     }
-}
 
 }
 }
