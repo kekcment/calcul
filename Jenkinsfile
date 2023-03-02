@@ -3,7 +3,7 @@ pipeline {
   agent {
     docker {
         image 'kekcment/tom:0.1.1'
-        args '--privileged -v /var/run/docker.sock:/var/run/docker.sock -u root'
+        args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }   
 
@@ -68,7 +68,7 @@ pipeline {
     stage('Deploy on slave1') {
       steps {
         sh 'ssh-keyscan -H root@jenkins >> ~/.ssh/known_hosts'
-        sh '''ssh root@slave1 << EOF
+        sh '''ssh root@84.201.177.23 << EOF
 	    sudo docker pull kekcment/hw
 	    docker run -d -p 8088:8080 kekcment/hw
         EOF'''
