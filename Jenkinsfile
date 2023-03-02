@@ -2,7 +2,7 @@ pipeline {
   
   agent {
     docker {
-        image 'kekcment/tom:0.1.1'
+        image 'kekcment/tom:0.1.2'
         args '--privileged -v /var/run/docker.sock:/var/run/docker.sock -u root'
     }
   }   
