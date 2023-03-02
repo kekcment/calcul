@@ -19,7 +19,6 @@ pipeline {
     stage('Build War') {
       steps {
         echo 'Build War'
-        sh 'ssh-keyscan -H devbuild-srv01 >> ~/.ssh/known_hosts'
         sh 'mvn package'
       }
     }
