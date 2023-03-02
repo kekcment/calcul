@@ -67,11 +67,10 @@ pipeline {
 
     stage('Deploy on slave1') {
       steps {
-        // sh 'ssh-keyscan -H root@jenkins >> ~/.ssh/known_hosts'
+        sh 'ssh-keyscan -H root@jenkins >> ~/.ssh/known_hosts'
         sh '''ssh -tt root@84.201.177.23 << EOF
 	      sudo docker pull kekcment/hw
-	      docker run -d -p 8088:8080 kekcment/hw
-        EOF'''
+	      docker run -d -p 8088:8080 kekcment/hw'''
       }
     }
 
